@@ -1,0 +1,32 @@
+
+Seu código parece correto e bem estruturado para fazer uma requisição à API da U.S. Naval Observatory e imprimir os dados retornados em um formato JSON legível. A ordem de latitude e longitude também está correta, seguindo o padrão de [latitude, longitude] usado na maioria das APIs geográficas.
+
+Sobre o JSON Retornado:
+O JSON que você recebeu contém várias partes de informação, tanto sobre a geometria (a localização para a qual você pediu os dados) quanto as propriedades dos corpos celestes (Sol e Lua, neste caso). Vamos detalhar alguns dos componentes-chave:
+
+apiversion: Indica a versão da API que está sendo usada.
+
+geometry:
+
+coordinates: Mostra as coordenadas geográficas que você forneceu na sua requisição, onde o primeiro valor é a longitude (-75.285) e o segundo valor é a latitude (36.8508).
+type: Indica o tipo de objeto, que neste caso é um ponto.
+properties -> data: Contém os dados astronômicos para os corpos celestes solicitados.
+
+Cada entrada em data representa um corpo celeste, neste caso, o Sol e a Lua, indicados pelo campo "object".
+
+Para cada um, você tem:
+
+almanac_data: Dados do almanaque para o corpo celeste.
+
+dec: Declinação em graus, que é a latitude celeste ou ângulo norte/sul em relação ao equador celeste.
+gha: Ângulo horário de Greenwich, que indica a localização do astro em relação ao meridiano de Greenwich.
+hc: Altura calculada, que é o ângulo acima do horizonte.
+zn: Azimute, que é a direção do astro em relação ao norte geográfico, medido em graus.
+altitude_corrections: Correções aplicadas à altitude observada.
+
+isCorrected: Indica se foram aplicadas correções.
+pa: Correção paraláctica.
+refr: Correção de refração atmosférica.
+sd: Diâmetro semimaior aparente do objeto.
+sum: Soma das correções.
+Estes dados são cruciais para a astronomia de posição, permitindo calcular onde exatamente no céu um objeto estará visto de uma localização específica na Terra, em um momento específico. Eles são especialmente úteis para alinhar telescópios e realizar observações precisas.

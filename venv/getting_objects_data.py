@@ -46,10 +46,33 @@ def select_visible_objects(infos, az_min, az_max, alt_min, alt_max):
             visible_objects.append(item['object'])
     return visible_objects
 
+def get_info_by_name(objects, name):
+    for item in objects:
+        if item['object'] == name:
+            item_info = item['almanac_data']
+            zn = item_info['zn']
+            hc = item_info['hc']
+            return zn, hc
 
-def move_telescope(az_init, alt_init, az_dest, alt_dest):
+def get_telescope_position(init):
+    # develop this later
+    return init
+
+def move_telescope(init, final):
+    az_init, alt_init = init
+    az_dest, alt_dest = final
+
     if az_init > az_dest:
+        az_final = az_init - az_dest
+    else:
         az_final = az_dest - az_init
+    if alt_init > alt_dest:
+        alt_final = alt_init - alt_dest
+    else:
+        az_final = alt_dest - alt_init
+
+    return az_final, alt_final
+    
 
 
 if __name__ == '__main__':
@@ -68,7 +91,16 @@ if __name__ == '__main__':
     objects_info = data['properties']['data']
     # print(json.dumps(objects_info, indent=4))
     objects = extract_objects(objects_info)
-    print(objects)
 
     visible_objects = select_visible_objects(infos=objects_info, az_min=az_min, az_max=az_max, alt_max=alt_max, alt_min=alt_min)
-    print(visible_objects)
+    
+    desire_object = 'Sun'
+    sun_pos = get_info_by_name(objects_info, desire_object)
+    print(sun_pos)
+    desire_object = 'Moon'
+    moon_pos = get_info_by_name(objects_info, desire_object)
+    print(moon_pos)
+
+    path = move_telescope(init=sun_pos, final=moon_pos)
+    print(path)
+
