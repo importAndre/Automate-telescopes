@@ -1,6 +1,8 @@
 import requests
 import json
 
+# API DOCS: https://aa.usno.navy.mil/data/api
+
 def get_objects_by_date_coor(date, latitude, longitude):
     '''
     almanac_data: Dados do almanaque para o corpo celeste.
@@ -43,6 +45,11 @@ def select_visible_objects(infos, az_min, az_max, alt_min, alt_max):
         if (item_az > az_min and item_az < az_max) and (item_alt > alt_min and item_alt < alt_max):
             visible_objects.append(item['object'])
     return visible_objects
+
+
+def move_telescope(az_init, alt_init, az_dest, alt_dest):
+    if az_init > az_dest:
+        az_final = az_dest - az_init
 
 
 if __name__ == '__main__':
